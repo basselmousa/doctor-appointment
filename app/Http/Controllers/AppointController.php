@@ -7,4 +7,8 @@ use Illuminate\Http\Request;
 class AppointController extends Controller
 {
     //
+    public function index()
+    {
+        return view('dashboard.appoints.appoints');
+    }
 }
