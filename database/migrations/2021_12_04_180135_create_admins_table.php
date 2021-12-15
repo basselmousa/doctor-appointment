@@ -20,8 +20,9 @@ class CreateAdminsTable extends Migration
             $table->string('certificates');
             $table->string('email')->unique();
             $table->string('days');
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->string('password');
+            $table->time('start');
+            $table->time('end');
             $table->timestamps();
         });
     }
