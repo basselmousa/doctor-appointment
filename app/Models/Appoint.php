@@ -9,6 +9,8 @@ class Appoint extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -19,7 +21,7 @@ class Appoint extends Model
     }
     public function vaccine()
     {
-        return $this->belongsTo(Vaccine::class);
+        return $this->belongsTo(Vaccine::class  );
     }
 
 }

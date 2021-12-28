@@ -18,7 +18,7 @@ class Admin extends Authenticatable
 
     public function vaccines()
     {
-        return $this->hasMany(Vaccine::class, 'vaccine_id');
+        return $this->belongsToMany(Vaccine::class, 'doctors_vaccines', 'admin_id');
     }
 
 }

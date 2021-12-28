@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function vaccines()
     {
-        return $this->hasMany(Vaccine::class, 'user_id');
+        return $this->belongsToMany(Vaccine::class, 'users_vaccines','user_id');
     }
 
 

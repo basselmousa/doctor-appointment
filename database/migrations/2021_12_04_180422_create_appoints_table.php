@@ -14,9 +14,14 @@ class CreateAppointsTable extends Migration
     public function up()
     {
         Schema::create('appoints', function (Blueprint $table) {
-            $table->foreignId("user_id")->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId("admin_id")->constrained('admins')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamp('time');
+            $table->foreignId("user_id")->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId("admin_id")->constrained('admins')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->time('time');
+            $table->string('day');
             $table->timestamps();
         });
     }

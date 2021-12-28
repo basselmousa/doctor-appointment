@@ -9,7 +9,7 @@ class Vaccine extends Model
 {
     use HasFactory;
 
-
+    protected $guarded= [];
     public function appoints()
     {
         return $this->hasMany(Appoint::class, 'vaccine_id');
@@ -17,12 +17,12 @@ class Vaccine extends Model
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsToMany(Admin::class, 'doctors_vaccines', 'vaccine_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class,'users_vaccines','vaccine_id');
     }
 
 }

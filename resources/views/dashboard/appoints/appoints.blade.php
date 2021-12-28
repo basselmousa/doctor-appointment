@@ -6,7 +6,7 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                            <h6 class="text-white text-capitalize ps-3">Authors table</h6>
+                            <h6 class="text-white text-capitalize ps-3">Appoints table</h6>
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
@@ -18,25 +18,42 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Doctor Name </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vaccine name </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Time</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Day</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                    </td>
-                                    <td class="align-middle text-center">
-                                    </td>
-                                    <td class="align-middle">
-                                    </td>
-                                </tr>
-
+                                @foreach($appoints as $appoint)
+                                    <tr>
+                                        <td>
+                                            {{ $appoint->user->full_name }}
+                                        </td>
+                                        <td>
+                                            {{ $appoint->admin->full_name }}
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            {{ $appoint->vaccine->vaccines_name }}
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            {{ $appoint->time }}
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            {{ $appoint->day }}
+                                        </td>
+                                        <td class="align-middle">
+                                            <button class="btn btn-primary"
+                                                    onclick="event.preventDefault();
+                                                    document.getElementById('done-form-{{$appoint->user_id}}-{{$appoint->vaccine_id}}').submit();
+                                                    ">Done</button>
+                                            <form id="done-form-{{$appoint->user_id}}-{{$appoint->vaccine_id}}"
+                                                  class="d-none"
+                                                  method="post"
+                                                  action="{{ route('admin.appoints.done-user',[$appoint->user_id,$appoint->vaccine_id]) }}">
+                                                @csrf
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
