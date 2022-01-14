@@ -1,121 +1,91 @@
-@extends('layouts.app')
-
-@section('content')
-
+<!DOCTYPE html>
+<html lang="en">
 
 
-    <div class="main" style="height: 856px !important;">
-        <input type="checkbox" id="chk" aria-hidden="true">
+<!-- Mirrored from www.urbanui.com/melody/template/pages/samples/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:53 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Doctor Appointment</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{asset('admin/signup/vendors/iconfonts/font-awesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/signup/vendors/css/vendor.bundle.base.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/signup/vendors/css/vendor.bundle.addons.css')}}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{asset('admin/signup/css/style.css')}}">
+    <!-- endinject -->
 
-        <div class="signup">
-            @if($errors->has('error'))
-                {{ $errors }}
-            @endif
-            <form method="POST" action="{{ route('admin.register') }}">
-                @csrf
+</head>
 
-                <label for="chk" aria-hidden="true">Sign up</label>
-                <input type="text" name="full_name" class="@error('full_name') is-invalid @enderror"
-                       placeholder="Full name" required>
-                @error('full_name')
-                <span class="invalid-feedback" role="alert">
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth">
+            <div class="row w-100">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left p-5">
+
+                        <h4>Hello! let's get started</h4>
+                        <h6 class="font-weight-light">Sign in to continue.</h6>
+                        <form class="pt-3" action="{{ route('admin.login') }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <input type="email" value="{{ old('email') }}"
+                                       name="email" class="form-control form-control-lg  @error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="Email">
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                @enderror
-                <input type="number" name="phone_number" class="@error('phone_number') is-invalid @enderror" placeholder="Phone number "
-                       required>
-                @error('phone_number')
-                <span class="invalid-feedback" role="alert">
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Password">
+
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                @enderror
+                                @enderror
+                            </div>
+                            <div class="mt-3">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                            </div>
+                            <div class="my-2 d-flex justify-content-between align-items-center">
 
-                <input type="email" name="email" class="@error('email') is-invalid @enderror" placeholder="Email"
-                       required>
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-                <textarea  name="certificates" class="@error('certificates') is-invalid @enderror" placeholder="Certificates" required></textarea>
-                @error('certificates')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
+                                <a href="#" class="auth-link text-black">Forgot password?</a>
+                            </div>
 
-
-                <select name="days[]" class="js-example-basic-single form-control" id="day" multiple>
-                    <option value="sunday">Sunday</option>
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                    <option value="friday">Friday</option>
-                    <option value="saturday">Saturday</option>
-                </select>
-
-
-                @error('days')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-
-
-                <input type="time" name="start" class="@error('start') is-invalid @enderror" placeholder="Please start start time in each day"
-                       required>
-                @error('start')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-
-
-                <input type="time" name="end" class="@error('end') is-invalid @enderror" placeholder="Please insert end time in each day"
-                       required>
-                @error('end')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-
-                <input type="password" name="password" class="@error('password') is-invalid @enderror"
-                       placeholder="Password" required>
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-
-                <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm Password"
-                       required autocomplete="new-password">
-
-                <button>Sign up</button>
-            </form>
+                            <div class="text-center mt-4 font-weight-light">
+                                Don't have an account? <a href="{{ route('admin.register') }}" class="text-primary">Create</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="login">
-            <form method="POST" action="{{ route('admin.login') }}">
-                @csrf
-                <label for="chk" aria-hidden="true">{{ __('Login') }}</label>
-                <input type="email" name="email" class="@error('email') is-invalid @enderror" placeholder="Email"
-                       required="">
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-                <input type="password" name="password" class="@error('password') is-invalid @enderror"
-                       placeholder="Password" required="">
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-                <button>Login</button>
-            </form>
-        </div>
+        <!-- content-wrapper ends -->
     </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="{{asset('admin/signup/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{asset('admin/signup/vendors/js/vendor.bundle.addons.js')}}"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="{{asset('admin/signup/js/off-canvas.js')}}"></script>
+<script src="{{asset('admin/signup/js/hoverable-collapse.js')}}"></script>
+<script src="{{asset('admin/signup/js/misc.js')}}"></script>
+<script src="{{asset('admin/signup/js/settings.js')}}"></script>
+<script src="{{asset('admin/signup/js/todolist.js')}}"></script>
+<!-- endinject -->
+</body>
 
-@endsection
+
+<!-- Mirrored from www.urbanui.com/melody/template/pages/samples/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:53 GMT -->
+</html>
