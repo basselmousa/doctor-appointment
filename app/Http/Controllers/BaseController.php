@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -41,5 +42,12 @@ class BaseController extends Controller
             'vaccine_id' => $request->vaccine
         ]);
         return redirect()->route('welcome');
+    }
+
+    public function user_vaccines()
+    {
+
+        $taked = User::taked();
+        return view('user-vaccines', compact('taked'));
     }
 }

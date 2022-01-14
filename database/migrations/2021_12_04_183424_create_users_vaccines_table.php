@@ -17,6 +17,7 @@ class CreateUsersVaccinesTable extends Migration
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('vaccine_id')->constrained('vaccines')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('admin_id')->constrained('admins')->cascadeOnDelete()->cascadeOnUpdate();
             $table->primary(['user_id', 'vaccine_id']);
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 
 class ChildrenController extends Controller
@@ -10,7 +11,9 @@ class ChildrenController extends Controller
 
     public function index()
     {
-        return view('dashboard.childrens.childrens');
+        $children = Admin::children();
+
+        return view('dashboard.childrens.childrens', compact('children'));
     }
 
 }

@@ -41,11 +41,8 @@
                     <div class="item">
                         <div class="card-doctor">
                             <div class="header">
-                                <img src="{{  asset("assets/img/doctors/doctor_1.jpg") }}" alt="">
-{{--                                <div class="meta">--}}
-{{--                                    <a href="#"><span class="mai-call"></span></a>--}}
-{{--                                    <a href="#"><span class="mai-logo-whatsapp"></span></a>--}}
-{{--                                </div>--}}
+                                <img src="{{  asset("storage/images/". $doctor->image) }}" alt="{{ $doctor->full_name }}">
+
                             </div>
                             <div class="body">
                                 <p class="text-xl mb-0"><a href="{{ route('view_doctor', $doctor->id) }}">{{ $doctor->full_name }}</a></p>

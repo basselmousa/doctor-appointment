@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
@@ -33,16 +34,18 @@ class AdminController extends Controller
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->route('admin.home');
         } else {
-            return back()->withErrors([
-                'email', 'does not exist or password invalid',
-            ]);
+            throw $this->sendFailedLoginResponse($request);
+
         }
+    }
+
+    public function signUpForm()
+    {
+        return view('dashboard.admin.auth.register');
     }
 
     public function signUp(Request $request)
     {
-
-
 
         $request->validate([
             'phone_number' => 'required|unique:admins,phone_number',
@@ -53,6 +56,7 @@ class AdminController extends Controller
             'start' => 'required',
             'end' => 'required',
             'password' => 'required|confirmed',
+            'img' => 'required|mimes:jpeg,jpg,png'
         ]);
         $days ='';
 
@@ -84,6 +88,14 @@ class AdminController extends Controller
 
     }
 
+    /** @noinspection PhpUnhandledExceptionInspection */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            'email' => [trans('auth.failed')],
+        ]);
+    }
+
     private function create(Request $request)
     {
 
@@ -96,6 +108,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'end' => $request->end,
             'password' => Hash::make($request->password),
+            'image' => $this->getImage($request)
         ]);
 
     }
@@ -113,6 +126,15 @@ class AdminController extends Controller
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect('/');
+    }
+
+    private function getImage(Request $request)
+    {
+        if ($request->hasFile('img')){
+            $request->file('img')->store('images','public');
+            return $request->file('img')->hashName();
+        }
+        return '';
     }
 
 }

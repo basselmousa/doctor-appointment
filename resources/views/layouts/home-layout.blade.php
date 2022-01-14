@@ -30,15 +30,6 @@
         <div class="container">
             <a class="navbar-brand" href="#"><span class="text-primary">Children</span>-Vaccines</a>
 
-{{--            <form action="#">--}}
-{{--                <div class="input-group input-navbar">--}}
-{{--                    <div class="input-group-prepend">--}}
-{{--                        <span class="input-group-text" id="icon-addon1"><span class="mai-search"></span></span>--}}
-{{--                    </div>--}}
-{{--                    <input type="text" class="form-control" placeholder="Enter keyword.." aria-label="Username"--}}
-{{--                           aria-describedby="icon-addon1">--}}
-{{--                </div>--}}
-{{--            </form>--}}
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport"
                     aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +45,11 @@
                     <li class="nav-item {{ request()->routeIs('doctors') ? 'active' : '' }}">
                         <a class="nav-link" href=" {{ route('doctors') }}">Doctors</a>
                     </li>
-
+                    @auth('web')
+                        <li class="nav-item {{ request()->routeIs('user-vaccines') ? 'active' : '' }}">
+                            <a class="nav-link" href=" {{ route('user-vaccines') }}">My Vaccines</a>
+                        </li>
+                    @endauth
                     <li class="nav-item">
                         @guest
                             @if (Route::has('login') || Route::has('register'))

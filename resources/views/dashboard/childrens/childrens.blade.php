@@ -18,24 +18,27 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Doctor Name </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vaccine name </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Time</th>
-                                    <th class="text-secondary opacity-7"></th>
+                                   
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
+                                @foreach($children as $child)
+                                    <tr>
+                                        <td>
+                                            {{ $child->user }}
+                                        </td>
+                                        <td>
+                                            {{ $child->admin }}
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            {{ $child->vaccine }}
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            {{ $child->date }}
+                                        </td>
 
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                    </td>
-                                    <td class="align-middle text-center">
-                                    </td>
-                                    <td class="align-middle">
-                                    </td>
-                                </tr>
+                                    </tr>
+                                @endforeach
 
                                 </tbody>
                             </table>
