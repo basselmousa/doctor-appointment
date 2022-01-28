@@ -65,7 +65,8 @@ class User extends Authenticatable
     }
 
     public function scopeTaked(Builder $query){
-        return $query->select(['admins.full_name as admin', 'users.full_name as user' , 'vaccines.vaccines_name as vaccine','users_vaccines.created_at as date'] )->from('users_vaccines')
+        return $query->select(['admins.full_name as admin', 'users.full_name as user' , 'vaccines.vaccines_name as vaccine','users_vaccines.created_at as date'] )
+            ->from('users_vaccines')
             ->join('admins', 'admins.id', '=', 'users_vaccines.admin_id')
             ->join('users', 'users.id', '=', 'users_vaccines.user_id')
             ->join('vaccines', 'vaccines.id', '=', 'users_vaccines.vaccine_id')

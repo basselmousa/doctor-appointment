@@ -52,6 +52,17 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
+
+a{
+	width: 60%;
+	height: 20px;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+}
 textarea{
 	width: 60%;
 	height: 60px;

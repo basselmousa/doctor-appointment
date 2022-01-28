@@ -41,7 +41,9 @@
                                         <i class="fa fa-user text-primary"></i>
                                       </span>
                                     </div>
-                                    <input type="text" name="full_name" class="form-control form-control-lg border-left-0 @error('full_name') is-invalid @enderror" placeholder="Username">
+                                    <input type="text"
+                                           value="{{ old('full_name') }}"
+                                           name="full_name" class="form-control form-control-lg border-left-0 @error('full_name') is-invalid @enderror" placeholder="Username">
 
                                     @error('full_name')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +60,9 @@
                                         <i class="far fa-envelope-open text-primary"></i>
                                       </span>
                                     </div>
-                                    <input type="email" name="email" class="form-control form-control-lg border-left-0 @error('email') is-invalid @enderror" placeholder="Email">
+                                    <input type="email"
+                                           value="{{ old('email') }}"
+                                           name="email" class="form-control form-control-lg border-left-0 @error('email') is-invalid @enderror" placeholder="Email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -97,7 +101,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Days </label>
-                                <select name="days[]" class="js-example-basic-multiple w-100 @error('days') is-invalid @enderror" multiple id="exampleFormControlSelect2">
+                                <select name="days[]"  class="js-example-basic-multiple w-100 @error('days') is-invalid @enderror" multiple id="exampleFormControlSelect2">
                                     <option value="sunday">Sunday</option>
                                     <option value="monday">Monday</option>
                                     <option value="tuesday">Tuesday</option>
@@ -119,7 +123,7 @@
                                     <div class="input-group-prepend bg-transparent">
 
                                     </div>
-                                    <textarea name="certificates" class="form-control form-control-lg @error('certificates') is-invalid @enderror"  id="exampleInputPassword" ></textarea>
+                                    <textarea name="certificates" class="form-control form-control-lg @error('certificates') is-invalid @enderror"  id="exampleInputPassword" >{{ old('certificates') }}</textarea>
 
                                     @error('certificates')
                                     <span class="invalid-feedback" role="alert">
@@ -132,7 +136,7 @@
                                 <label>Phone Number</label>
                                 <div class="input-group">
 
-                                    <input type="text" name="phone_number" class="form-control form-control-lg @error('phone_number') is-invalid @enderror" id="exampleInputPassword" placeholder="009627********">
+                                    <input type="text" value="{{ old('phone_number') }}" name="phone_number" class="form-control form-control-lg @error('phone_number') is-invalid @enderror" id="exampleInputPassword" placeholder="009627********">
 
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
@@ -145,7 +149,7 @@
                                 <label>Start</label>
                                 <div class="input-group">
 
-                                    <input type="time" name="start" class="form-control form-control-lg @error('start') is-invalid @enderror" id="exampleInputPassword" placeholder="Password">
+                                    <input type="time" name="start" value="{{ old('start') }}" class="form-control form-control-lg @error('start') is-invalid @enderror" id="exampleInputPassword" placeholder="Password">
 
                                     @error('start')
                                     <span class="invalid-feedback" role="alert">
@@ -159,7 +163,7 @@
                                 <label>End</label>
                                 <div class="input-group">
 
-                                    <input type="time" name="end" class="form-control form-control-lg @error('end') is-invalid @enderror" id="exampleInputPassword" placeholder="Password">
+                                    <input type="time" name="end" value="{{ old('end') }}" class="form-control form-control-lg @error('end') is-invalid @enderror" id="exampleInputPassword" placeholder="Password">
 
                                     @error('end')
                                     <span class="invalid-feedback" role="alert">
@@ -171,7 +175,7 @@
 
                             <div class="form-group">
                                 <label>Upload Image</label>
-                                <input type="file" name="img" class="file-upload-default  @error('img') is-invalid @enderror">
+                                <input type="file" name="img" value="{{ old('img') }}" class="file-upload-default  @error('img') is-invalid @enderror">
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                                     <span class="input-group-append">

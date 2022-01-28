@@ -26,4 +26,10 @@ class AppointController extends Controller
         $user->appoints()->where('vaccine_id', '=', $vaccine->id)->delete();
         return redirect()->route('admin.appoints.home');
     }
+
+    public function delete_user(Request $request, User $user, Vaccine $vaccine)
+    {
+        $user->appoints()->where('vaccine_id', '=', $vaccine->id)->delete();
+        return redirect()->route('admin.appoints.home');
+    }
 }

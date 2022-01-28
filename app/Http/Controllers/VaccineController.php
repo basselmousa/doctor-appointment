@@ -47,7 +47,7 @@ class VaccineController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'age' => 'required'
+            'age' => 'required|max:10'
         ]);
         Vaccine::create([
             'vaccines_name' => $request->name,

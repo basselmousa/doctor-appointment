@@ -51,6 +51,17 @@
                                                   action="{{ route('admin.appoints.done-user',[$appoint->user_id,$appoint->vaccine_id]) }}">
                                                 @csrf
                                             </form>
+                                            <button class="btn btn-primary"
+                                                    onclick="event.preventDefault();
+                                                    document.getElementById('done-form-{{$appoint->user_id}}-{{$appoint->vaccine_id}}').submit();
+                                                    ">Delete</button>
+                                            <form id="done-form-{{$appoint->user_id}}-{{$appoint->vaccine_id}}"
+                                                  class="d-none"
+                                                  method="post"
+                                                  action="{{ route('admin.appoints.delete-user',[$appoint->user_id,$appoint->vaccine_id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

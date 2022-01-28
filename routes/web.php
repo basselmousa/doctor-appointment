@@ -45,6 +45,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'admin.', 'middleware' => ['auth:
     Route::group(['prefix' => 'appoints' , 'as' => 'appoints.'], function (){
         Route::get('/', [\App\Http\Controllers\AppointController::class, 'index'])->name('home');
         Route::post('/{user}/{vaccine}', [\App\Http\Controllers\AppointController::class, 'done_user'])->name('done-user');
+        Route::delete('/{user}/{vaccine}', [\App\Http\Controllers\AppointController::class, 'delete_user'])->name('delete-user');
 
     });
 

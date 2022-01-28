@@ -32,7 +32,7 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('admin.home');
+            return redirect()->route('admin.doctors.home');
         } else {
             throw $this->sendFailedLoginResponse($request);
 
@@ -54,7 +54,7 @@ class AdminController extends Controller
             'email' => ['required', 'unique:admins,email'],
             'days' => 'required',
             'start' => 'required',
-            'end' => 'required',
+            'end' => 'required|after_or_equal:start',
             'password' => 'required|confirmed',
             'img' => 'required|mimes:jpeg,jpg,png'
         ]);
@@ -78,7 +78,7 @@ class AdminController extends Controller
 
             return $request->wantsJson()
                 ? new JsonResponse([], 201)
-                : redirect()->route('admin.home');
+                : redirect()->route('admin.doctors.home');
 
         } catch (\Exception $e) {
 
