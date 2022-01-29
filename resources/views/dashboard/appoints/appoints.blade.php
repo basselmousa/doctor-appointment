@@ -19,6 +19,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vaccine name </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Time</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Day</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
@@ -39,6 +40,9 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             {{ $appoint->day }}
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            {{ $appoint->date }}
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-primary"

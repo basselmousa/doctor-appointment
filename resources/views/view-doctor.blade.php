@@ -13,6 +13,7 @@
                     <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
 
                         <input type="time" name="time" min="{{ $id->start }}" max="{{ $id->end }}"
+                               value="{{ old('time') }}"
                                class="form-control @error('time') is-invalid @enderror">
                         <small>Please choose time between {{ $id->start }} and {{ $id->end }}</small>
                         @error('time')
@@ -25,7 +26,7 @@
                         <select name="vaccine" id="departement" class="custom-select @error('vaccine') is-invalid @enderror">
 
                             @foreach($vaccines as $vaccine)
-                                <option value="{{ $vaccine->id }}">{{ $vaccine->vaccines_name }}</option>
+                                <option value="{{ $vaccine->id }}" {{ old('vaccine') == $vaccine->id ? 'selected' : '' }}>{{ $vaccine->vaccines_name }}</option>
                             @endforeach
 
                         </select>
@@ -41,7 +42,7 @@
                             @foreach(explode(',' , $id->days) as $day)
                                 @empty( !$day )
 
-                                    <option value="{{ $day }}">{{ $day }}</option>
+                                    <option value="{{ $day }}" {{ old('day') == $day ? 'selected' : '' }}>{{ $day }}</option>
                                 @endempty
                             @endforeach
 
@@ -53,6 +54,16 @@
                         @enderror
                     </div>
 
+                    <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
+
+                        <input type="date"  name="date"
+                               class="form-control @error('date') is-invalid @enderror">
+                        @error('date')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
