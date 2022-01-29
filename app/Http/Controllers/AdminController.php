@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -16,7 +17,7 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:admin')->except(['logout','edit_profile','edit_profile_put']);
     }
 
     public function index()
@@ -55,7 +56,7 @@ class AdminController extends Controller
             'days' => 'required',
             'start' => 'required',
             'end' => 'required|after_or_equal:start',
-            'password' => 'required|confirmed',
+            'password' => 'required|min:8|confirmed',
             'img' => 'required|mimes:jpeg,jpg,png'
         ]);
         $days ='';
@@ -113,6 +114,69 @@ class AdminController extends Controller
 
     }
 
+    public function edit_profile()
+    {
+         $days =array();
+        foreach (explode(',',\auth('admin')->user()->days) as $day) {
+            $days [] = $day;
+
+        }
+        $days = collect($days);
+
+        // dd(collect($days)->contains('sunday'));
+
+        return view('dashboard.admin.edit', compact('days'));
+    }
+
+    public function edit_profile_put(Request $request)
+    {
+        $request->validate([
+            'phone_number' => 'required|unique:admins,phone_number,'.\auth('admin')->user()->id,
+            'full_name' => 'required',
+            'certificates' => 'required',
+            'email' => ['required', 'unique:admins,email,'.\auth('admin')->user()->id],
+            'days' => 'required',
+            'start' => 'required',
+            'end' => 'required|after_or_equal:start',
+            'password' => 'nullable|min:8|confirmed',
+            'img' => 'nullable|mimes:jpeg,jpg,png'
+        ]);
+//        dd(isset($request->img));
+        if (isset($request->password)){
+            $password = Hash::make($request->password);
+            $request->password = $password;
+        }else{
+            $request->password = \auth('admin')->user()->password;
+        }
+        if (isset($request->img)){
+            $img = $this->getImage($request);
+            $request->img = $img;
+        }
+        else{
+            $request->img = \auth('admin')->user()->image;
+        }
+        $days = '';
+        foreach ($request->days as $day) {
+            $days .= $day . ',';
+        }
+        $request->days = $days;
+
+        \auth('admin')->user()->update([
+           'phone_number' => $request->phone_number,
+           'full_name' => $request->full_name,
+           'certificates' => $request->certificates,
+           'email' => $request->email,
+           'days' => $request->days,
+           'password' => $request->password,
+           'image' => $request->img,
+           'start' => $request->start,
+           'end' => $request->end,
+
+        ]);
+        return redirect()->route('admin.doctors.home');
+
+    }
+
 
     public function logout(Request $request)
     {
@@ -136,5 +200,6 @@ class AdminController extends Controller
         }
         return '';
     }
+
 
 }

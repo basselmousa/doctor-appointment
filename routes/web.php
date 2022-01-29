@@ -36,6 +36,8 @@ Route::post('/admin/login', [App\Http\Controllers\AdminController::class, 'login
 Route::get('/admin/register', [App\Http\Controllers\AdminController::class, 'signUpForm'])->name('admin.register');
 Route::post('/admin/register', [App\Http\Controllers\AdminController::class, 'signUp'])->name('admin.register.post');
 Route::post('/admin/logout', [App\Http\Controllers\AdminController::class, 'logout'])->name('admin.logout');
+Route::get('/admin/edit', [App\Http\Controllers\AdminController::class, 'edit_profile'])->name('admin.edit');
+Route::put('/admin/edit', [App\Http\Controllers\AdminController::class, 'edit_profile_put'])->name('admin.edit.put');
 
 
 Route::group(['prefix' => 'dashboard', 'as' => 'admin.', 'middleware' => ['auth:admin']], function (){
